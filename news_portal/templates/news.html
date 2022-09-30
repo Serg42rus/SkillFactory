@@ -1,0 +1,22 @@
+
+{% extends 'default.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+Post
+{% endblock title %}
+
+<!-- В контенте на странице выводим пост, идентификатор которого был передан в url -->
+{% block content %}
+<div>
+<div>
+  <div>
+    <h5> {{ post.title }} </h5>
+    <h6> Дата публикации: {{ post.date_time }} </h6>
+    <p>{{ post.text|censor }}</p>
+    <a></a>
+  </div>
+</div>
+</div>
+{% endblock content %}
