@@ -1,7 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Sum
+from django import template
 
+register = template.Library()
 
 
 class Author(models.Model):
@@ -26,6 +28,7 @@ class Category(models.Model):
 
 
 class Post(models.Model):
+
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
 
     NEWS = 'NW'
@@ -52,9 +55,6 @@ class Post(models.Model):
 
     def preview(self):
         return self.text[0:124] + '...'
-
-    def __str__(self):
-        return f'{self.title}, {self.DateCreation}, {self.text[:20]}...'
 
 
 class PostCategory(models.Model):

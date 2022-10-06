@@ -1,0 +1,17 @@
+{% extends 'default2.html' %}
+
+{% block title %}
+  новости
+{% endblock %}
+
+{% block content %}
+<div>
+<div>
+  <div>
+<p>{{post.title}}</p>
+      <p>{{post.text|censor}}</p>
+
+  </div>
+</div>
+</div>
+{% endblock content %}

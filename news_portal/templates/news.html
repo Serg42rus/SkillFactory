@@ -1,21 +1,23 @@
+{% extends 'default2.html' %}
 
-{% extends 'default.html' %}
+{% load custom_filter %}
 
-{% load custom_filters %}
 
 {% block title %}
-Post
-{% endblock title %}
+  новости
+{% endblock %}
 
-<!-- В контенте на странице выводим пост, идентификатор которого был передан в url -->
 {% block content %}
 <div>
 <div>
   <div>
-    <h5> {{ post.title }} </h5>
-    <h6> Дата публикации: {{ post.date_time }} </h6>
-    <p>{{ post.text|censor }}</p>
-    <a></a>
+
+
+    <h5> {% for p in post %} </h5>
+          <p>{{ p.title }}</p>
+          <p>  {{ p.text|slice:":20"|censor }}</p>
+          <p>{{p.DateCreation}}</p>
+          <a>{% endfor %}</a>
   </div>
 </div>
 </div>
