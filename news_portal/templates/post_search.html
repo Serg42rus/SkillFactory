@@ -1,0 +1,76 @@
+{% extends 'default2.html' %}
+
+{% load custom_filter %}
+{% load custom_tags %}
+{% block title %}
+  новости
+{% endblock %}
+
+{% block content %}
+<div>
+<div>
+  <div>
+    <form action="" method="get" >
+
+    <label for=>{{ filterset.form.name__icontains.id_for_label }}поиск</label>
+    <input
+        id="{{ filterset.form.name__icontains.id }}"
+        name="{{ filterset.form.name__icontains.name }}"
+        value="{{ filterset.form.name__icontains.value }}"
+        class="form-control"
+    >
+    <input type="submit" class="mt-3 btn-primary" value="Найти" />
+
+   <label for="meeting-time">Выберите время:</label>
+
+<input type="datetime-local" id="meeting-time"
+       name="meeting-time" value="2018-06-12T19:30"
+       min="2018-06-07T00:00" max="2018-06-14T00:00">
+    </form>
+<div class="col-lg-12 text-center">
+    <h1>Все посты</h1>
+    <h3>Всего постов: {{ post|length }}</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Заголовок</th>
+            <th scope="col">Дата публикации</th>
+            <th scope="col">Текст</th>
+            <th scope="col">Ссылка на статью</th>
+            <th scope="col">Редактировать</th>
+            <th scope="col">Удалить</th>
+        </tr>
+        </thead>
+        <tbody>
+    <h5> {% for p in post %} </h5>
+          <p>{{ p.title }}</p>
+          <p>{{ p.text|slice:":20"|censor }}</p>
+          <p>{{p.DateCreation}}</p>
+          <a>{% endfor %}</a>
+        </tbody>
+    </table>
+         {% if page_obj.has_previous %}
+       <a href="?page=1">1</a>
+         {% if page_obj.previous_page_number != 1 %}
+           ...
+           <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+        {% endif %}
+        {% endif %}
+
+   {# Информация о текущей странице #}
+   {{ page_obj.number }}
+
+   {# Информация о следующих страницах #}
+   {% if page_obj.has_next %}
+       <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+       {% if paginator.num_pages != page_obj.next_page_number %}
+           ...
+           <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+       {% endif %}
+   {% endif %}
+
+</div>
+  </div>
+</div>
+</div>
+{% endblock content %}
