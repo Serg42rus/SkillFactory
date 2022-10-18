@@ -1,4 +1,5 @@
 from django.contrib.admin.templatetags.admin_list import pagination
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import *
@@ -11,6 +12,7 @@ class PostList(ListView):
     template_name = 'news.html'
     context_object_name = 'post'
     paginate_by = 1
+    # raise_exception = True
 
 
 class PostDetail(DetailView):
@@ -18,6 +20,7 @@ class PostDetail(DetailView):
     template_name = 'news_id.html'
     context_object_name = 'post'
     pk_url_kwarg = 'pk'
+    # raise_exception = True
 
 
 class SearchPost(ListView):
@@ -27,17 +30,26 @@ class SearchPost(ListView):
     paginate_by = 1
 
     def get_queryset(self):
+        # Получаем обычный запрос
         queryset = super().get_queryset()
+        # Используем наш класс фильтрации.
+        # self.request.GET содержит объект QueryDict, который мы рассматривали
+        # в этом юните ранее.
+        # Сохраняем нашу фильтрацию в объекте класса,
+        # чтобы потом добавить в контекст и использовать в шаблоне.
         self.filterset = PostFilter(self.request.GET, queryset)
+        # Возвращаем из функции отфильтрованный список товаров
         return self.filterset.qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        # Добавляем в контекст объект фильтрации.
         context['filterset'] = self.filterset
         return context
 
 
 class ArticleCreate(CreateView):
+    """ Представление для создания статьи. """
     form_class = PostForm
     model = Post
     template_name = 'post_create.html'
@@ -49,6 +61,7 @@ class ArticleCreate(CreateView):
 
 
 class ArticleUpdate(UpdateView):
+    """ Представление для редактирования статьи. """
     form_class = PostForm
     model = Post
     template_name = 'post_create.html'
@@ -60,6 +73,7 @@ class ArticleUpdate(UpdateView):
 
 
 class ArticleDelete(DeleteView):
+    """ Представление для удаления статьи. """
     model = Post
     template_name = 'post_delete.html'
     success_url = reverse_lazy('news')
@@ -72,6 +86,7 @@ class ArticleDelete(DeleteView):
 
 
 class NewsCreate(CreateView):
+    """ Представление для создания новости. """
     form_class = PostForm
     model = Post
     template_name = 'post_create.html'
@@ -83,6 +98,7 @@ class NewsCreate(CreateView):
 
 
 class NewsUpdate(UpdateView):
+    """ Представление для редактирования новости. """
     form_class = PostForm
     model = Post
     template_name = 'post_create.html'
@@ -94,6 +110,7 @@ class NewsUpdate(UpdateView):
 
 
 class NewsDelete(DeleteView):
+    """ Представление для удаления новости. """
     model = Post
     template_name = 'post_delete.html'
     success_url = reverse_lazy('news')

@@ -10,6 +10,16 @@
 {% block content %}
 <div>
 <div>
+
+    {# Теперь будем проверять не request.user.is_authenticated, а конкретные права #}
+    {% if perms.news.news_create %}
+    <a href="{% url 'news_create' %}">Добавить новость</a>
+    {% endif %}
+
+    {% if perms.news.article_create %}
+    <a href="{% url 'article_create' %}">Добавить статью</a>
+    {% endif %}
+
   <div>
 
     <h5> {% for p in post %} </h5>
