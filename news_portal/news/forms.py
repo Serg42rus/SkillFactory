@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Post
+from django.forms import ModelForm
+from .models import Post, Subscribers
 
 
 class PostForm(forms.ModelForm):
@@ -17,3 +18,9 @@ class PostForm(forms.ModelForm):
        if name == title:
            raise ValidationError()
        return cleaned_data
+
+
+class SubscribeForm(ModelForm):
+    class Meta:
+        model = Subscribers
+        fields = ['category_subscribers']

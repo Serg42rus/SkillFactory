@@ -79,3 +79,8 @@ class Comment(models.Model):
 
     def preview(self):
         return self.text[0:124] + '...'
+
+
+class Subscribers(models.Model):
+    category_subscribers = models.ForeignKey(Category, on_delete=models.CASCADE)
+    user_subscribers = models.ForeignKey(User, on_delete=models.CASCADE)

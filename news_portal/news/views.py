@@ -1,10 +1,13 @@
 from django.contrib.admin.templatetags.admin_list import pagination
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.core.mail import send_mail
+from accounts.forms import *
 from .models import *
 from .filters import PostFilter
-from .forms import PostForm
+from news.forms import PostForm, SubscribeForm
 
 
 class PostList(ListView):
@@ -120,3 +123,20 @@ class NewsDelete(DeleteView):
         context['page_title'] = "Удалить новость"
         context['previous_page_url'] = reverse_lazy('news')
         return context
+
+
+class SubscribersView(LoginRequiredMixin, CreateView):
+    template_name = 'subscribers.html'
+    form_class = SubscribeForm
+    model = Subscribers
+    context_object_name = 'subscribers'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+    def form_valid(self,form):
+        user = self.request.user
+        form.instance.user = User.objects.get(pk=user.id)
+        self.object = form.save()
+        return redirect('/')

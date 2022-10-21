@@ -1,0 +1,19 @@
+{% extends 'default2.html' %}
+
+{% block title %}
+subscribers
+{% endblock title %}
+
+
+{% block content %}
+<hr>
+<form method="POST">
+
+    {% csrf_token %}
+    {{ form }} 
+	{{ user.username}}
+	
+    <input type="submit" value="Подписаться">
+</form>
+
+{% endblock content %}
