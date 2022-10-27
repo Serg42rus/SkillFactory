@@ -30,7 +30,7 @@ def my_job():
             body="Новости",
             from_email='serg42rus@yugs.ru',
             to=category.get_subscribers_emails())
-        msg.attach_alternative(html_content, "week_email/html")
+        msg.attach_alternative(html_content, "week_email.html")
         msg.send()
 
 
