@@ -31,6 +31,9 @@
           <p>{{ p.DateCreation }}</p>
           <a>{% endfor %}</a>
 
+      {% load cache %}
+      {% cache 100 pagination %}
+
       {% if page_obj.has_previous %}
        <a href="?page=1">1</a>
        {% if page_obj.previous_page_number != 1 %}
@@ -56,3 +59,4 @@
 </div>
 </div>
 {% endblock content %}
+{% endcache %}

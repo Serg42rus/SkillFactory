@@ -1,4 +1,3 @@
-from django.contrib.admin.templatetags.admin_list import pagination
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
@@ -8,6 +7,7 @@ from accounts.forms import *
 from .models import *
 from .filters import PostFilter
 from news.forms import PostForm, SubscribeForm
+from django.core.cache import cache
 
 
 class PostList(ListView):
@@ -61,6 +61,7 @@ class ArticleCreate(CreateView):
         context = super().get_context_data(**kwargs)
         context['page_title'] = "Добавить статью"
         return context
+
 
 
 class ArticleUpdate(UpdateView):
