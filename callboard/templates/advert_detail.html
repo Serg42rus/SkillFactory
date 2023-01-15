@@ -1,0 +1,22 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+  новости
+{% endblock %}
+
+{% block content %}
+<div>
+<div>
+  <div>
+      <p>{{advert.title}}</p>
+      <p>{{advert.CategoryType}}</p>
+      <p>{{advert.text}}</p>
+
+        <div class="container">
+    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/board/respond/">Коментарий</a></li>
+        </div>
+
+  </div>
+</div>
+</div>
+{% endblock content %}

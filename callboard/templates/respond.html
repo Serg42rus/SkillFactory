@@ -1,0 +1,34 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+
+{% load custom_tags %}
+{% block title %}
+  новости
+{% endblock %}
+
+{% block content %}
+
+
+{% if respond %}
+<table>
+
+<div>
+<div>
+  <div>
+            {% for r in respond %}
+              <p>{{ r.respondAuthor }}</p>
+              <p>{{ r.text }}</p>
+              <p>{{ r.dateCreation }}</p>
+            {% endfor %}
+
+  </div>
+</div>
+</div>
+
+</table>
+   {% else %}
+       <h2>Коментариев нет!</h2>
+   {% endif %}
+
+{% endblock content %}
