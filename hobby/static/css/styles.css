@@ -1,0 +1,55 @@
+.header {
+    font-size:200%;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: #333366;
+    background : #61e4e8;
+    padding: 34px 50px;
+   }
+
+.navigation{
+    float: right;
+    height: 10%;
+     position: fixed;
+        top: 7%;
+        left: 40%;
+}
+
+.navigation a{
+    height: 100%;
+    float: left;
+    padding: 0px 20px;
+    background-color: #61e4e8;
+}
+
+.navigation a li{
+    vertical-align: middle;
+    display: table-cell;
+    font-size:40px;
+    color: white;
+}
+
+.navigation a:hover{
+    background-color: gray;
+    color: #101010;
+}
+
+.footer {
+    font-size:20px;
+    background-color: #61e4e8;
+    border-style: double;
+    padding : 10px;
+    vertical-align: middle;
+    }
+
+.line {
+    padding: 20px;
+    background-color : red;
+    }
+
+.container {
+    font-size:40px;
+    }
+
+.row {
+    padding: 10px 0px;
+    }

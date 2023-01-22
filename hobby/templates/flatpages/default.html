@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+
+    <meta charset="UTF-8">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+
+<head>
+<title>Моё хобби</title>
+
+       <div class="header">
+
+           <h1>Моё хобби</h1>
+               <ul class="navigation">
+                   <a  href="/home/"><li>главная</li></a>
+                   <a  href="/about_me/"><li>обо мне</li></a>
+                   <a  href="/contact/"><li>мои контакты</li></a>
+               </ul>
+
+       </div>
+
+</head>
+
+    <body>
+
+<div class="container">
+
+    <table>
+   <div class="row">
+       <tr>
+       <th>
+           <img src="/static/css/mebelshik.png" width="500px" height="50%">
+       </th>
+   </div>
+       <th>
+        <div>
+           {% block content %}
+           {{ flatpage.content }}
+           {% endblock content %}
+       </div>
+       </th>
+       </tr>
+   </table>
+</div>
+    </body>
+<hr class="line">
+<footer class="footer">
+
+    <a href="/about_me/">обо мне</a>
+    <div align="center">
+    <a href="/contact/">мои контакты</a>
+    </div>
+    <div align="right">
+    <p>2020г.</p>
+    </div>
+</footer>
+</html>
