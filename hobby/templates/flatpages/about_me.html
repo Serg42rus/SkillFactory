@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
+<body class="container">
            {% block content %}
-         <div>  {{ flatpage.title }} </div>
-         <div> {{ flatpage.content }}</div>
+          {{ flatpage.title }}
+        <p class="container"> {{ flatpage.content }}</p>
+           <hr class="line2">
            {% endblock content %}
+
 </body>
+
 </html>
