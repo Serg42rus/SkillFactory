@@ -1,0 +1,14 @@
+import SwaggerUI from "swagger-ui-react";
+import "swagger-ui-react/swagger-ui.css"
+
+const spec = require('./swagger-config.yaml');
+
+const ui = SwaggerUI({
+  spec,
+  dom_id: '#swagger',
+});
+
+ui.initOAuth({
+  appName: "Swagger UI Webpack Demo",
+  clientId: 'serg42rus'
+});

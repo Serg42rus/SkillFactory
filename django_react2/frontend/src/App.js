@@ -1,30 +1,25 @@
 import React from 'react';
-
-import { Link, Routes, Route } from 'react-router-dom';
-import Category from './components/Category';
-import Reciept from './components/Reciept';
+import {Routes, Route } from 'react-router-dom';
+import {Reciept} from './components/Reciept';
+import Layout from './components/Layout'
+import {Category} from './components/Category';
+import SingleReciept from './components/SingleReciept';
 
 
 function App() {
   return (
-    <div>
-      <header>
-        <h1>Книга рецептов</h1>
-        <Link to="/">Главная</Link>
-        <Link to="soup">первое блюдо</Link>
-        <Link to="main">основное блюдо</Link>
-        <Link to="desert">десерт</Link>
-      </header>
-      
+    <div className='app'>    
       <main>
       <Routes>
-          <Route path="/"></Route>
-          <Route path=":category" element={<Category/>}></Route>
-          <Route path=":category/:index" element={<Reciept/>}></Route>
+        <Route path="/"element={<Layout/>}>
+          <Route index element={<Reciept/>}></Route>
+          <Route path="category/" element={<Category/>}></Route>
+          <Route path="Cook_Book/:id" element={<SingleReciept/>}></Route>
+        </Route>  
       </Routes>
       </main>
     </div>
   );
 }
 
-export default App;
+export {App};

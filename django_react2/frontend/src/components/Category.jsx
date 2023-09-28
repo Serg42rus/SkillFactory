@@ -1,48 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
-function Category () {
-    let params = useParams();
-    let category = params.category;
-    
-    const catDict = {
-        soup: "первое блюдо",
-        main: "Основное блюдо",
-        desert: "Десерт",
-    }
-    
-    const location = useLocation();
-    const [listOfCategory, setListOfCategory] = useState();
 
+const Category = () => {
+    
+    const [listOfCategory, setListOfCategory] = useState([]);
+    
     useEffect(()=> {
-            fetch(`http://127.0.0.1:8000/api/cook_book`)
+            fetch(`http://127.0.0.1:8000/category/`)
             .then(response => response.json())
-            .then((result) => {
-            setListOfCategory(result)})          
-    }, [category]);
-
-    if (listOfCategory) {
-        return (
-            <div>
-                <h3> { catDict[category] } </h3>
-                { listOfCategory.map((Reciept, index)=> {
-                    return <>
-                        <div key={ index }>
-                        {Reciept.category} |
-                        <Link to= {location.pathname + "/" + index }> рецепт </Link>
-                        </div>
-                        </>
-                }) }
-            </div>
+            .then(data => setListOfCategory(data))          
+    }, []);
+        
+            return (
+                <div>
+                    <h3> категории </h3>
+                
+                    { 
+                        listOfCategory.map(Reciept=> (                        
+                            <Link key={Reciept.title} to={`/Cook_Book/${Reciept.id}` }>
+                                <li>{Reciept.title}</li>
+                                    Читать рецепт полностью
+                            </Link>
+                        )) 
+                    }
+                </div>
         );
-    } else {
-        return (
-            <div>
-                { category }
-            </div>
-        );
-    }
+          
+        }     
+    
 
-}
-
-export default Category;
+export {Category};
